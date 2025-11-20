@@ -5,30 +5,24 @@ interface LoginPayload {
     password: string;
 }
 
-export async function login(data: LoginPayload) {
+export const login = (data: LoginPayload) => {
     return request({
         url: '/login',
-        method: 'POST',
+        method: 'post',
         data: data
     });
 };
 
-export async function getUserInfo(accessToken: string) {
+export const getUserInfo = () => {
     return request({
         url: '/user/info',
-        method: 'GET',
-        data: {
-            accessToken
-        }
+        method: 'get',
     });
 };
 
-export function logout(accessToken: string) {
+export function logout() {
     return request({
         url: '/logout',
-        method: 'POST',
-        data: {
-            accessToken
-        }
+        method: 'post',
     });
 };

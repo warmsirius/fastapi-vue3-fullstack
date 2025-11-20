@@ -8,7 +8,7 @@ type AppRouteRecordRaw = RouteRecordRaw & {
 const constantRoutes: AppRouteRecordRaw[] = [
     {
         path: "/",
-        component: () => import("@/views/login/index.vue"),
+        component: () => import("@/views/index/index.vue"),
         hidden: true,
     },
     {
