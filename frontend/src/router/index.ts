@@ -1,28 +1,36 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import type { RouteRecordRaw } from "vue-router";
 
-type AppRouteRecordRaw = RouteRecordRaw & {
-    hidden?: boolean;
-};
-
-const constantRoutes: AppRouteRecordRaw[] = [
-    {
-        path: "/",
-        component: () => import("@/views/index/index.vue"),
-        hidden: true,
-    },
-    {
-        path: "/login",
-        component: () => import("@/views/login/index.vue"),
-        hidden: true,
-    },
+const constantRoutes = [
+  {
+    path: "/",
+    component: () => import("@/views/index/index.vue"),
+    meta: {
+      noAuth: false,
+    }
+  },
+  {
+    path: "/login",
+    component: () => import("@/views/login/index.vue"),
+    meta: {
+      noAuth: true,
+    }
+  },
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes: constantRoutes as RouteRecordRaw[],
+  history: createWebHashHistory(),
+  routes: constantRoutes,
 });
 
+
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+    if (to.meta.noAuth !== true) {
+        next('/login');
+    } else {
+        next();
+    }
+});
 
 export function resetRouter() {
   // 注意：所有动态路由路由必须带有name属性，否则可能会不能完全重置干净

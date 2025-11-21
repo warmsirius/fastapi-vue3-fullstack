@@ -59,7 +59,7 @@ export const useUserStore = defineStore('user', {
     // 获取用户信息
     async getUserInfo() {
       try {
-        const { data } = await getUserInfo(this.accessToken)
+        const { data } = await getUserInfo();
         if (!data) {
           ElMessage.error('验证失败，请重新登录...')
           return false
@@ -89,7 +89,7 @@ export const useUserStore = defineStore('user', {
     
     // 退出登录
     async logout() {
-      await logout(this.accessToken)
+      await logout();
       this.resetAccessToken()
       await resetRouter()
       location.reload()
