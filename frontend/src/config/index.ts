@@ -4,3 +4,6 @@ export const storage = "localStorage"; // or "sessionStorage", or null
 export const tokenTableName = "fastapi_vue3_fullstack_token";
 export const VITE_API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string) || '';
 export const publicPath = (import.meta.env.VITE_PUBLIC_PATH as string) || '/';
+export const loginInterception = true; // 是否开启登录拦截
+export const routesWhiteList = ["/login"]; // 白名单路由，如登录页等无需权限验证的路由
+export const recordRoute = true; // 登录拦截时，是否记录跳转的路由
