@@ -1,17 +1,15 @@
+import type { ApiResponse } from "@/types/response";
+import type { LoginPayload, LoginData } from "@/types/user";
 import request from "@/utils/request";
 
-interface LoginPayload {
-    username: string;
-    password: string;
-}
 
-export const login = (data: LoginPayload) => {
+export async function login(data:LoginPayload): Promise<ApiResponse<LoginData>> {
     return request({
         url: '/login',
         method: 'post',
-        data: data
+        data,
     });
-};
+}
 
 export const getUserInfo = () => {
     return request({

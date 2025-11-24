@@ -66,7 +66,7 @@
 
           <div class="register-link">
             <span>还没有账号?</span>
-            <router-link to="/register" class="create-account">
+            <router-link to="/login" class="create-account">
               立即注册
             </router-link>
           </div>

@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { login, getUserInfo, logout } from '@/api/user'
 import { resetRouter } from '@/router'
+import type { ApiResponse } from '@/types/response'
+import type { LoginPayload, LoginData } from '@/types/user'
 import { getAccessToken, setAccessToken, removeAccessToken } from '@/utils/accessToken'
 import { ElMessage } from 'element-plus'
 import {title, tokenName} from '@/config'
@@ -10,11 +12,6 @@ interface UserState {
   username: string
   avatar: string
   permissions: string[]
-}
-
-interface LoginPayload {
-  username: string
-  password: string
 }
 
 export const useUserStore = defineStore('user', {
@@ -36,12 +33,16 @@ export const useUserStore = defineStore('user', {
   actions: {
     // 登录
     async login(userInfo: LoginPayload) {
-      const { data } = await login(userInfo)
-      const accessToken = data[tokenName as keyof typeof data]
+      console.log("login userInfo:", userInfo)
+      const {access_token, username, avatar}  = await login(userInfo)
+      console.log("login response data:", access_token, name, avatar)
+      // const accessToken = data[tokenName as keyof typeof data]
+      console.log("accessToken:", access_token)
 
-      if(accessToken) {
-        this.accessToken = accessToken
-        setAccessToken(accessToken)
+      if(access_token) {
+        this.accessToken = access_token
+        console.log("this.accessToken:", this.accessToken)
+        setAccessToken(access_token)
         // 时间问候语
         const hour = new Date().getHours()
         const thisTime = 
